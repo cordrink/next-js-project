@@ -1,4 +1,4 @@
-import { createSafeActionClient } from "next-safe-action";
+import {createSafeActionClient} from "next-safe-action";
 
 export class SafeError extends Error {
     constructor(error: string) {

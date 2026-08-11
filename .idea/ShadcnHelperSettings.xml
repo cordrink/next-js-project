@@ -3234,6 +3234,30 @@
         <option name="homepage" value="https://shoogle.dev" />
         <option name="urlTemplate" value="https://shoogle.dev/r/{name}.json" />
       </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-blockforge" />
+        <option name="name" value="Blockforge" />
+        <option name="namespace" value="@blockforge" />
+        <option name="baseUrl" value="https://blockforge.terravidhal.me/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="170+ production-grade shadcn/ui blocks, forged to ship. Full source in TypeScript + Tailwind CSS, plus a page builder and starter pages. Copy, paste, ship." />
+        <option name="homepage" value="https://blockforge.terravidhal.me" />
+        <option name="urlTemplate" value="https://blockforge.terravidhal.me/r/{name}.json" />
+      </RegistryConfigState>
+      <RegistryConfigState>
+        <option name="id" value="central-atroui" />
+        <option name="name" value="Atroui" />
+        <option name="namespace" value="@atroui" />
+        <option name="baseUrl" value="https://www.atroui.com/r" />
+        <option name="stylePath" value="/{name}.json" />
+        <option name="type" value="community" />
+        <option name="enabled" value="false" />
+        <option name="description" value="Dark-first React / Next.js components and marketing blocks. Install with the shadcn CLI and own the source." />
+        <option name="homepage" value="https://www.atroui.com" />
+        <option name="urlTemplate" value="https://www.atroui.com/r/{name}.json" />
+      </RegistryConfigState>
     </registryConfigs>
   </component>
 </project>

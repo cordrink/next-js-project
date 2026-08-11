@@ -13,7 +13,7 @@ export const addReviewSafeAction = actionClient
     ).action(async ({parsedInput: input}) => {
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        if (input.name  === "mechant") {
+        if (input.name === "mechant") {
             throw new SafeError("Invalid name")
         }
 

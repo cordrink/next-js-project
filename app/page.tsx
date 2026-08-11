@@ -5,9 +5,6 @@ import {prisma} from "@/lib/prisma";
 import {Card, CardContent, CardDescription, CardHeader} from "@/components/ui/card";
 import SelectStar from "@/app/(formation-layout)/courses/select-star";
 import {EditTitle} from "@/app/(formation-layout)/courses/edit-title";
-import {Label} from "@/components/ui/label";
-import {Input} from "@/components/ui/input";
-import {Textarea} from "@/components/ui/textarea";
 import {Button} from "@/components/ui/button";
 import {revalidatePath} from "next/cache";
 import {X} from "lucide-react";
@@ -19,7 +16,7 @@ export default async function Home() {
 
     const changeStar = async (reviewId: string, star: number) => {
         "use server"
-        await  prisma.review.update({
+        await prisma.review.update({
             where: {
                 id: reviewId,
             },
@@ -36,7 +33,7 @@ export default async function Home() {
 
         await new Promise(resolve => setTimeout(resolve, 1000));
 
-        await  prisma.review.update({
+        await prisma.review.update({
             where: {
                 id: reviewId,
             },
@@ -88,7 +85,7 @@ export default async function Home() {
                 ))}
             </div>
             <Card className={"px-4"}>
-                <ReviewFrom />
+                <ReviewFrom/>
             </Card>
         </PageLayout>
     );
