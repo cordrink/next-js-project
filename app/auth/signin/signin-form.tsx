@@ -15,21 +15,19 @@ import {
     FieldLabel,
 } from "@/components/ui/field"
 import {Input} from "@/components/ui/input"
-import {signUp} from "@/lib/auth-client";
+import {signIn} from "@/lib/auth-client";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 
 const formSchema = z.object({
-    name: z.string(),
     email: z.email(),
     password: z.string(),
 })
 
-export const SignupForm = () => {
+export const SigninForm = () => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
             email: "",
             password: "",
         },
@@ -41,14 +39,14 @@ export const SignupForm = () => {
         // Do something with the form values.
         console.log(data)
 
-        await signUp.email({
+        await signIn.email({
                 email: data.email,
                 password: data.password,
-                name: data.name,
             },
             {
                 onSuccess: () => {
                     router.push("/auth");
+                    router.refresh();
                 },
                 onError: error => {
                     toast.error(error.error.message);
@@ -61,28 +59,6 @@ export const SignupForm = () => {
         <Card className="w-full px-2">
             <CardContent>
                 <form className={"flex flex-col gap-6"} id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
-                    <Controller
-                        name="name"
-                        control={form.control}
-                        render={({field, fieldState}) => (
-                            <Field data-invalid={fieldState.invalid}>
-                                <FieldLabel htmlFor="form-rhf-demo-title">
-                                    Name
-                                </FieldLabel>
-                                <Input
-                                    {...field}
-                                    id="form-rhf-demo-title"
-                                    aria-invalid={fieldState.invalid}
-                                    aria-label={"name"}
-                                    placeholder="Patrick"
-                                    autoComplete="on"
-                                />
-                                {fieldState.invalid && (
-                                    <FieldError errors={[fieldState.error]}/>
-                                )}
-                            </Field>
-                        )}
-                    />
                     <Controller
                         name="email"
                         control={form.control}

@@ -1,27 +1,27 @@
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card";
-import {SignupForm} from "@/app/auth/signup/signup-form";
+import {SigninForm} from "@/app/auth/signin/signin-form";
 import Link from "next/link";
 
-export default function SignUpPage() {
+export default function Signin() {
     return (
         <>
             <Card>
                 <CardHeader>
-                    <CardTitle>Sign Up</CardTitle>
+                    <CardTitle>Sign In</CardTitle>
                 </CardHeader>
                 <CardContent>
-                    <SignupForm/>
+                    <SigninForm/>
                 </CardContent>
                 <CardFooter>
                     <p className={"text-sm text-muted-foreground"}>
-                        Already have an account ?{" "}
+                        Don't have an account ?{" "}
                         <Link
-                            href="/auth/signin"
+                            href="/auth/signup"
                             className={"text-blue-600 hover:underline"}
-                        >Sign in</Link>
+                        >Sign up</Link>
                     </p>
                 </CardFooter>
             </Card>
         </>
     );
-};
+}
