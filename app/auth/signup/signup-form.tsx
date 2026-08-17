@@ -129,11 +129,12 @@ export const SignupForm = () => {
                             </Field>
                         )}
                     />
+                    <Button type="submit" form="form-rhf-demo">
+                        Submit
+                    </Button>
                 </form>
             </CardContent>
-            <Button type="submit" form="form-rhf-demo">
-                Submit
-            </Button>
+
         </Card>
     )
 };

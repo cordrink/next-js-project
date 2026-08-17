@@ -18,6 +18,7 @@ import {Input} from "@/components/ui/input"
 import {signIn} from "@/lib/auth-client";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
+import {GitGraph} from "lucide-react";
 
 const formSchema = z.object({
     email: z.email(),
@@ -55,10 +56,24 @@ export const SigninForm = () => {
         )
     }
 
+    const signInWithProvider = async (provider: string) => {
+        await signIn.social({
+                provider: provider,
+                callbackURL: "/auth",
+            },
+            {
+                onSuccess: () => {},
+                onError: error => {
+                    toast.error(error.error.message);
+                }
+            }
+        )
+    }
+
     return (
         <Card className="w-full px-2">
-            <CardContent>
-                <form className={"flex flex-col gap-6"} id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
+            <CardContent className="flex items-center flex-col gap-8">
+                <form className={"flex flex-col gap-6 w-full"} id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
                     <Controller
                         name="email"
                         control={form.control}
@@ -105,11 +120,18 @@ export const SigninForm = () => {
                             </Field>
                         )}
                     />
+                    <Button type="submit" form="form-rhf-demo">
+                        Submit
+                    </Button>
                 </form>
+                <p className={"text-sm text-muted-foreground"}>OR</p>
+                <div className="flex w-full gap-4">
+                    <Button onClick={()=> signInWithProvider("github")} className="flex-1" variant="outline">
+                        <GitGraph />
+                        Sign in with Github
+                    </Button>
+                </div>
             </CardContent>
-            <Button type="submit" form="form-rhf-demo">
-                Submit
-            </Button>
         </Card>
     )
 };
