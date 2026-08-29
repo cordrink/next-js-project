@@ -15,24 +15,20 @@ import {
     FieldLabel,
 } from "@/components/ui/field"
 import {Input} from "@/components/ui/input"
-import {signIn} from "@/lib/auth-client";
+import {authClient, signIn} from "@/lib/auth-client";
 import {useRouter} from "next/navigation";
 import {toast} from "sonner";
 import {GitGraph} from "lucide-react";
-import Link from "next/link";
 
 const formSchema = z.object({
-    email: z.email(),
-    password: z.string(),
+    name: z.string(),
+    image: z.string().nullable().optional(),
 })
 
-export const SigninForm = () => {
+export const AccountForm = (props: {defaultValues: z.infer<typeof formSchema>}) => {
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            email: "",
-            password: "",
-        },
+        defaultValues: props.defaultValues,
     })
 
     const router = useRouter();
@@ -41,9 +37,9 @@ export const SigninForm = () => {
         // Do something with the form values.
         console.log(data)
 
-        await signIn.email({
-                email: data.email,
-                password: data.password,
+        await authClient.updateUser({
+                name: data.name,
+                image: data.image,
             },
             {
                 onSuccess: () => {
@@ -76,12 +72,12 @@ export const SigninForm = () => {
             <CardContent className="flex items-center flex-col gap-8">
                 <form className={"flex flex-col gap-6 w-full"} id="form-rhf-demo" onSubmit={form.handleSubmit(onSubmit)}>
                     <Controller
-                        name="email"
+                        name="name"
                         control={form.control}
                         render={({field, fieldState}) => (
                             <Field data-invalid={fieldState.invalid}>
                                 <FieldLabel htmlFor="form-rhf-demo-title">
-                                    Email
+                                    name
                                 </FieldLabel>
                                 <Input
                                     {...field}
@@ -89,7 +85,6 @@ export const SigninForm = () => {
                                     aria-invalid={fieldState.invalid}
                                     aria-label={"email"}
                                     placeholder="example@gmail.com"
-                                    type={"email"}
                                     autoComplete="on"
                                 />
                                 {fieldState.invalid && (
@@ -99,24 +94,20 @@ export const SigninForm = () => {
                         )}
                     />
                     <Controller
-                        name="password"
+                        name="image"
                         control={form.control}
                         render={({field, fieldState}) => (
                             <Field data-invalid={fieldState.invalid}>
-                                <div className={"flex items-center gap-2"}>
-                                    <FieldLabel htmlFor="form-rhf-demo-title">
-                                        password
-                                    </FieldLabel>
-                                    <div className="flex-1"></div>
-                                    <Link href={"/auth/forget-password"} className={"text-indigo-500 text-sm"}>Forget Password</Link>
-                                </div>
+                                <FieldLabel htmlFor="form-rhf-demo-title">
+                                    Image URL
+                                </FieldLabel>
                                 <Input
                                     {...field}
                                     id="form-rhf-demo-title"
                                     aria-invalid={fieldState.invalid}
                                     aria-label={"password"}
                                     placeholder="Password"
-                                    type={"password"}
+                                    value={field.value ?? ""}
                                     autoComplete="off"
                                 />
                                 {fieldState.invalid && (

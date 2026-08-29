@@ -1,7 +1,8 @@
 import {getUser} from "@/lib/auth-server";
 import {Card, CardContent, CardHeader, CardTitle} from "@/components/ui/card";
 import {unauthorized} from "next/navigation";
-import {Check} from "lucide-react";
+import {Check, Edit} from "lucide-react";
+import Link from "next/link";
 
 export default async function AuthPage() {
     const user = await getUser()
@@ -13,8 +14,13 @@ export default async function AuthPage() {
     return (
         <>
             <Card>
-                <CardHeader>
+                <CardHeader className="flex items-center gap-2">
                     <CardTitle>User profile</CardTitle>
+                    <div className={"flex-1"}></div>
+                    <Link className={"flex items-center gap-2 text-sm"} href={`/auth/edit`}>
+                        <Edit className={"size-3 text-muted-foreground"}/>
+                        Edit
+                    </Link>
                 </CardHeader>
                 <CardContent>
                     <div className={"grid gap-2"}>
